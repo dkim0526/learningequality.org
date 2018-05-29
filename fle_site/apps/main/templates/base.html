@@ -20,7 +20,7 @@
 
         <link href="{% static 'bootstrap/css/bootstrap3.min.css' %}" media="all" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-        
+
         {% if debug %}
             <link href="{% static 'less/styles.less' %}" media="all" rel="stylesheet/less" type="text/css" />
         {% else %}
@@ -47,7 +47,7 @@
             // Twitter follow button
             !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
-            // Facebook SDK 
+            // Facebook SDK
             window.fbAsyncInit = function() {
                 FB.init({
                   appId      : '837442399601941',
@@ -95,7 +95,7 @@
             </div>
         {% endblock bodyoverride %}
         {% block footeroverride %}
-             {% include "main/partials/_footer.html" %} 
+             {% include "main/partials/_footer.html" %}
         {% endblock footeroverride %}
     </div>
     {% block analytics %}

@@ -28,7 +28,7 @@
         #logo-text {
             position: relative;
             top: 10px;
-        }        
+        }
         .banner-logo {
             display: inline;
         }
@@ -150,8 +150,14 @@
     <script src="{% static 'js/infobox.js' %}"></script>
 
     <script>
+
+        function showGdprModal(){
+          $(window).on('load',function(){
+              $('#myModal').modal('show');
+          });
+        }
         function showDeployments(map) {
-            // Add deployment markers 
+            // Add deployment markers
             var deployments = {{ deployments|jsonify_obj|safe }}
 
             var iconSize = new google.maps.Size(35, 35);
@@ -176,7 +182,7 @@
                     url: iconImage,
                     scaledSize: iconSize
                 };
-                
+
                 var marker = new google.maps.Marker({
                     position: latLng,
                     map: map,
@@ -196,6 +202,9 @@
                     showDeploymentModal(hash);
                 });
             }
+
+            // load modal for gdpr privay update
+            setTimeout(showGdprModal(), 5000);
         }
 
         function loadSlideshow(modalObj) {
@@ -303,7 +312,7 @@
         }
 
         function display_locations(locations) {
-            // Create map 
+            // Create map
             $("#map_canvas").height($(window).height());
             var map = new google.maps.Map(document.getElementById('map_canvas'), {
                 // mapTypeId: google.maps.MapTypeId.HYBRID,
@@ -342,7 +351,7 @@
         }
 
         // Note that this jsonp file passes a list of location objects to 'display_locations' above
-        // so it is what triggers all the action here. 
+        // so it is what triggers all the action here.
         $.getScript("{{ LOCATIONS_JSONP_URL }}");
 
         $(function() {
@@ -363,7 +372,7 @@
                 } else if (event.keyCode === 33) {
                     $('#free-tshirt-modal').modal('hide');
                     return false;
-                } 
+                }
             });
         });
     </script>
@@ -383,14 +392,18 @@
         <div id="map_canvas">
             <div id="loading-message">Please wait. Awesomeness will be with you shortly...</div>
         </div>
-    </div>            
+        {% include "ka_lite/partials/_map_privacy_policy_modal.html" %}
+    </div>
+
+
+
     {% include "ka_lite/partials/_map_modal_content.html" %}
     {% include "ka_lite/partials/_about_map_modal.html" %}
-    {% include "ka_lite/partials/_tshirt_modal.html" %}    
+    {% include "ka_lite/partials/_tshirt_modal.html" %}
 {% endblock bodyoverride %}
 
 {% block footerspacing %}{% endblock %}
-    
+
 {% block footeroverride %}
     {# This page intentionally left blank #}
 {% endblock footeroverride %}
